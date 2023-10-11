@@ -102,6 +102,22 @@ class App extends React.Component<Props, GameState> {
     }
   }
 
+  // undo(): React.MouseEventHandler {
+  //   return async (e) => {
+  //     // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
+  //     e.preventDefault();
+  //     const response = await fetch(`/undo`)
+  //     const json = await response.json();
+  //     this.setState({ cells: json['cells'], instructions: json['instructions'] });
+  //   }
+  // }
+
+  undo = async () => {
+    const response = await fetch('/undo');
+    const json = await response.json();
+    this.setState({ cells: json['cells'], instructions: json['instructions'] });
+  }
+
   /**
    * The only method you must define in a React.Component subclass.
    * @returns the React element via JSX.
@@ -124,7 +140,7 @@ class App extends React.Component<Props, GameState> {
         <div id="bottombar">
           <button onClick={/* get the function, not call the function */this.newGame}>New Game</button>
           {/* Exercise: implement Undo function */}
-          <button>Undo</button>
+          <button onClick={this.undo}>Undo</button>
         </div>
       </div>
     );
